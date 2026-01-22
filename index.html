@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style.css" rel="stylesheet" />
+    <title>Fact Hive</title>
+  </head>
+  <body>
+    <header>
+      <img src="FactHiveLogo.png" height="68px" alt="Fact Hive Logo" />
+      <h1>Fact Hive</h1>
+      <p>Share facts that matter!</p>
+      <button>Post a Fact</button>
+    </header>
+
+    <form>
+      <input type="text" placeholder="Share a mind-blowing fact..." />
+      <span>200</span>
+      <input type="text" placeholder="Drop the fact source..." />
+      <select>
+        <option value="">Choose category:</option>
+        <option value="technology">Technology</option>
+        <option value="science">Science</option>
+        <option value="finance">Psychology</option>
+      </select>
+      <button>Post</button>
+    </form>
+
+    <main>
+      <aside>
+        <ul>
+          <li><button>All</button></li>
+          <li><button>Technology</button></li>
+          <li><button>Science</button></li>
+          <li><button>Psychology</button></li>
+        </ul>
+      </aside>
+
+      <section>
+        <ul>
+          <li>
+            <p>
+              React is being developed by Meta (formerly facebook)
+              <a href="https://opensource.fb.com/" target="_blank">(Source)</a>
+              <span>#technology#</span>
+            </p>
+            <div>
+              <button>👍 <strong>15</strong></button>
+              <button>🤯 <strong>3</strong></button>
+              <button>⛔ <strong>2</strong></button>
+            </div>
+          </li>
+          <li>
+            <p>
+              Millennial dads spend 3 times as much time with their kids than
+              their fathers spent with them. In 1982, 43% of fathers had never
+              changed a diaper. Today, that number is down to 3%
+              <a
+                href="https://www.mother.ly/parenting/millennial-dads-spend-more-time-with-their-kids"
+                target="_blank"
+                >(Source)</a
+              >
+              <span>#Psychology#</span>
+            </p>
+            <div>
+              <button>👍 <strong>15</strong></button>
+              <button>🤯 <strong>3</strong></button>
+              <button>⛔ <strong>2</strong></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
