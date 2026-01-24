@@ -1,0 +1,39 @@
+body {
+  background-color: #e0f2fe;
+  color: #075985;
+  font-family: "Saira Semi Condensed", sans-serif;
+}
+
+h1 {
+  font-family: "Quicksand", sans-serif;
+  font-size: 44px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 0.6;
+  color: #0c4a6e;
+}
+
+.tagline {
+  text-align: center;
+  font-size: 18px;
+}
+
+.fact-form {
+  background-color: #fefef1;
+}
+
+.thread {
+  font-size: 20px;
+  line-height: 1.4;
+  background-color: #fefef1;
+}
+
+.tag {
+  font-family: "Quicksand", sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+ul {
+  list-style: none;
+}

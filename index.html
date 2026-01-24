@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <link href="style.css" rel="stylesheet" />
     <title>Fact Hive</title>
   </head>
@@ -10,11 +20,11 @@
     <header>
       <img src="FactHiveLogo.png" height="68px" alt="Fact Hive Logo" />
       <h1>Fact Hive</h1>
-      <p>Share facts that matter!</p>
+      <p class="tagline">Share facts that matter!</p>
       <button>Post a Fact</button>
     </header>
 
-    <form>
+    <form class="fact-form">
       <input type="text" placeholder="Share a mind-blowing fact..." />
       <span>200</span>
       <input type="text" placeholder="Drop the fact source..." />
@@ -40,10 +50,10 @@
       <section>
         <ul>
           <li>
-            <p>
+            <p class="thread">
               React is being developed by Meta (formerly facebook)
               <a href="https://opensource.fb.com/" target="_blank">(Source)</a>
-              <span>#technology#</span>
+              <span class="tag">#technology#</span>
             </p>
             <div>
               <button>👍 <strong>15</strong></button>
@@ -52,7 +62,7 @@
             </div>
           </li>
           <li>
-            <p>
+            <p class="thread">
               Millennial dads spend 3 times as much time with their kids than
               their fathers spent with them. In 1982, 43% of fathers had never
               changed a diaper. Today, that number is down to 3%
@@ -61,7 +71,7 @@
                 target="_blank"
                 >(Source)</a
               >
-              <span>#Psychology#</span>
+              <span class="tag">#Psychology#</span>
             </p>
             <div>
               <button>👍 <strong>15</strong></button>
