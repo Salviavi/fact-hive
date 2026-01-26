@@ -17,10 +17,15 @@
     <title>Fact Hive</title>
   </head>
   <body>
-    <header>
-      <img src="FactHiveLogo.png" height="68px" alt="Fact Hive Logo" />
-      <h1>Fact Hive</h1>
-      <p class="tagline">Share facts that matter!</p>
+    <header class="header">
+      <div class="logo">
+        <img src="FactHiveLogo.png" height="68px" alt="Fact Hive Logo" />
+
+        <h1>Fact Hive</h1>
+      </div>
+      <div class="tagline">
+        <p>Share facts that matter!</p>
+      </div>
       <button>Post a Fact</button>
     </header>
 
@@ -49,20 +54,22 @@
 
       <section>
         <ul>
-          <li>
-            <p class="thread">
+          <li class="thread">
+            <p>
               React is being developed by Meta (formerly facebook)
               <a href="https://opensource.fb.com/" target="_blank">(Source)</a>
-              <span class="tag">#technology#</span>
             </p>
-            <div>
+            <span class="tag" style="background-color: #b9fbc0"
+              >#technology#</span
+            >
+            <div class="vote-buttons">
               <button>👍 <strong>15</strong></button>
               <button>🤯 <strong>3</strong></button>
               <button>⛔ <strong>2</strong></button>
             </div>
           </li>
-          <li>
-            <p class="thread">
+          <li class="thread">
+            <p>
               Millennial dads spend 3 times as much time with their kids than
               their fathers spent with them. In 1982, 43% of fathers had never
               changed a diaper. Today, that number is down to 3%
@@ -71,9 +78,11 @@
                 target="_blank"
                 >(Source)</a
               >
-              <span class="tag">#Psychology#</span>
             </p>
-            <div>
+            <span class="tag" style="background-color: #cfbaf0"
+              >#Psychology#</span
+            >
+            <div class="vote-buttons">
               <button>👍 <strong>15</strong></button>
               <button>🤯 <strong>3</strong></button>
               <button>⛔ <strong>2</strong></button>

@@ -1,37 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #e0f2fe;
   color: #075985;
   font-family: "Saira Semi Condensed", sans-serif;
+  padding: 44px;
+}
+
+.header {
+  position: relative;
+  margin-bottom: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tagline {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 h1 {
   font-family: "Quicksand", sans-serif;
   font-size: 44px;
   text-transform: uppercase;
-  text-align: center;
   line-height: 0.6;
   color: #0c4a6e;
 }
 
 .tagline {
-  text-align: center;
   font-size: 18px;
 }
 
 .fact-form {
   background-color: #fefef1;
+  margin-bottom: 44px;
+  padding: 20px 40px;
+  text-align: center;
 }
 
 .thread {
   font-size: 20px;
-  line-height: 1.4;
+  line-height: 2;
   background-color: #fefef1;
+  margin-bottom: 20px;
+  padding: 20px 28px;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .tag {
   font-family: "Quicksand", sans-serif;
   font-size: 14px;
   text-transform: uppercase;
+  font-weight: 500;
+  padding: 2px 10px;
 }
 
 ul {
