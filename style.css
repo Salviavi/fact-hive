@@ -12,7 +12,7 @@ body {
 }
 
 .app-container {
-  max-width: 1100px;
+  max-width: 1250px;
   margin: 0 auto;
 }
 
@@ -30,6 +30,12 @@ body {
   display: grid;
   grid-template-columns: 1fr 5fr;
   gap: 40px;
+}
+
+@media (max-width: 800px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
 }
 
 /***/
@@ -50,6 +56,7 @@ body {
 .tagline {
   position: absolute;
   left: 50%;
+  bottom: 30%;
   transform: translateX(-50%);
 }
 
@@ -65,6 +72,14 @@ h1 {
   font-size: 18px;
 }
 
+@media (max-width: 950px) {
+  .tagline {
+    position: static;
+    transform: none;
+    justify-items: flex-end;
+  }
+}
+
 .fact-form {
   background-color: #fefef1;
   margin-bottom: 44px;
@@ -74,6 +89,19 @@ h1 {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+@media (max-width: 1180px) {
+  body {
+    padding: 36px 48px;
+  }
+
+  .fact-form {
+    max-width: 800px;
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: auto;
+  }
 }
 
 .fact-form input,
@@ -113,13 +141,24 @@ h1 {
   padding: 20px 28px;
   border-radius: 16px;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: 4fr auto auto;
   align-items: center;
   gap: 20px;
 }
 
+@media (max-width: 1180px) {
+  .thread {
+    grid-template-columns: 1fr;
+  }
+
+  .tag,
+  .vote-buttons {
+    justify-self: end;
+  }
+}
+
 .vote-buttons {
-  margin-left: auto;
   display: flex;
   gap: 8px;
 
@@ -130,7 +169,7 @@ h1 {
   background-color: #bae6fd;
   border: none;
   font-size: 16px;
-  padding: 8px 16px;
+  padding: 4px 12px;
   border-radius: 100px;
   font-family: inherit;
   color: inherit;
