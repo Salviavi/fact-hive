@@ -69,7 +69,36 @@ h1 {
   background-color: #fefef1;
   margin-bottom: 44px;
   padding: 20px 40px;
-  text-align: center;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.fact-form input,
+.fact-form select {
+  background-color: #7dd3fc;
+  border: none;
+  border-radius: 100px;
+  padding: 12px 20px;
+  font-size: 20px;
+  font-family: inherit;
+  color: inherit;
+}
+
+.fact-form input::placeholder {
+  color: #f0f9ff;
+}
+
+.fact-form span {
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 20px;
+}
+
+.fact-form input:first-child {
+  flex-grow: 1;
 }
 
 .category {
@@ -82,10 +111,36 @@ h1 {
   background-color: #fefef1;
   margin-bottom: 20px;
   padding: 20px 28px;
+  border-radius: 16px;
 
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.vote-buttons {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+
+  flex-shrink: 0;
+}
+
+.vote-buttons button {
+  background-color: #bae6fd;
+  border: none;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-family: inherit;
+  color: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.vote-buttons button:hover {
+  background-color: #7dd3fc;
 }
 
 .link-source:link {
