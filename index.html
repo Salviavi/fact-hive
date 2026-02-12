@@ -29,10 +29,10 @@
           </div>
         </div>
 
-        <button class="btn btn-large">Post a Fact</button>
+        <button class="btn btn-large btn-open">Post a Fact</button>
       </header>
 
-      <form class="fact-form">
+      <form class="fact-form hidden">
         <input type="text" placeholder="Share a mind-blowing fact..." />
         <span>200</span>
         <input type="text" placeholder="Drop the fact source..." />
@@ -79,13 +79,13 @@
         </aside>
 
         <section>
-          <ul>
+          <ul class="threads-list">
             <li class="thread">
               <p>
-                React is being developed by Meta (formerly facebook)
+                Next.js is developed by the team at Vercel
                 <a
                   class="link-source"
-                  href="https://opensource.fb.com/"
+                  href="https://nextjs.org/governance"
                   target="_blank"
                   >(Source)</a
                 >
@@ -101,12 +101,12 @@
             </li>
             <li class="thread">
               <p>
-                Millennial dads spend 3 times as much time with their kids than
-                their fathers spent with them. In 1982, 43% of fathers had never
-                changed a diaper. Today, that number is down to 3%
+                While children who are exposed to childhood violence may have
+                more problems as adults, they're not automatically doomed to
+                become abusers themselves.
                 <a
                   class="link-source"
-                  href="https://www.mother.ly/parenting/millennial-dads-spend-more-time-with-their-kids"
+                  href="https://developingchild.harvard.edu/resources/briefs/8-things-remember-child-development/"
                   target="_blank"
                   >(Source)</a
                 >
@@ -124,5 +124,7 @@
         </section>
       </main>
     </div>
+
+    <script src="script.js"></script>
   </body>
 </html>

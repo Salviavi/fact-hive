@@ -11,6 +11,10 @@ body {
   padding: 44px 64px;
 }
 
+.hidden {
+  display: none;
+}
+
 .app-container {
   max-width: 1250px;
   margin: 0 auto;
@@ -243,4 +247,10 @@ ul {
 .btn-category {
   width: 100%;
   background-image: none;
+}
+
+/* COLLAPSED FACT FORM */
+
+.hidden {
+  display: none;
 }
