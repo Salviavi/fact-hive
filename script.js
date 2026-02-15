@@ -174,3 +174,5 @@ function myFind(array) {
 }
 
 console.log("haha2", myFind(numbers));
+
+// Switching to React
