@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,118 +16,12 @@
       href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link href="style.css" rel="stylesheet" />
+    <!-- FONT -->
+
     <title>Fact Hive</title>
   </head>
   <body>
-    <div class="app-container">
-      <header class="header">
-        <div class="header-left">
-          <div class="logo">
-            <img src="FactHiveLogo.png" height="68px" alt="Fact Hive Logo" />
-            <h1>Fact Hive</h1>
-          </div>
-          <div class="tagline">
-            <p>Share facts that matter!</p>
-          </div>
-        </div>
-
-        <button class="btn btn-large btn-open">Post a Fact</button>
-      </header>
-
-      <form class="fact-form hidden">
-        <input type="text" placeholder="Share a mind-blowing fact..." />
-        <span>200</span>
-        <input type="text" placeholder="Drop the fact source..." />
-        <select>
-          <option value="">Choose category:</option>
-          <option value="technology">Technology</option>
-          <option value="science">Science</option>
-          <option value="finance">Psychology</option>
-        </select>
-        <button class="btn btn-large">Post</button>
-      </form>
-
-      <main class="app-main">
-        <aside>
-          <ul>
-            <li class="category">
-              <button class="btn btn-all-categories">All</button>
-            </li>
-            <li class="category">
-              <button
-                class="btn btn-category"
-                style="background-color: #b9fbc0"
-              >
-                Technology
-              </button>
-            </li>
-            <li class="category">
-              <button
-                class="btn btn-category"
-                style="background-color: #cfbaf0"
-              >
-                Science
-              </button>
-            </li>
-            <li class="category">
-              <button
-                class="btn btn-category"
-                style="background-color: #ffcfd2"
-              >
-                Psychology
-              </button>
-            </li>
-          </ul>
-        </aside>
-
-        <section>
-          <ul class="threads-list">
-            <li class="thread">
-              <p>
-                Next.js is developed by the team at Vercel
-                <a
-                  class="link-source"
-                  href="https://nextjs.org/governance"
-                  target="_blank"
-                  >(Source)</a
-                >
-              </p>
-              <span class="tag" style="background-color: #b9fbc0"
-                >technology</span
-              >
-              <div class="vote-buttons">
-                <button>👍 15</button>
-                <button>🤯 3</button>
-                <button>⛔ 2</button>
-              </div>
-            </li>
-            <li class="thread">
-              <p>
-                While children who are exposed to childhood violence may have
-                more problems as adults, they're not automatically doomed to
-                become abusers themselves.
-                <a
-                  class="link-source"
-                  href="https://developingchild.harvard.edu/resources/briefs/8-things-remember-child-development/"
-                  target="_blank"
-                  >(Source)</a
-                >
-              </p>
-              <span class="tag" style="background-color: #cfbaf0"
-                >Psychology</span
-              >
-              <div class="vote-buttons">
-                <button>👍 15</button>
-                <button>🤯 3</button>
-                <button>⛔ 2</button>
-              </div>
-            </li>
-          </ul>
-        </section>
-      </main>
-    </div>
-
-    <script src="script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
