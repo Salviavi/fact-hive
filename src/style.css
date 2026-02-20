@@ -15,7 +15,7 @@ body {
   display: none;
 }
 
-.app-container {
+#root {
   max-width: 1250px;
   margin: 0 auto;
 }
@@ -170,7 +170,7 @@ h1 {
 }
 
 .vote-buttons button {
-  background-color: #bae6fd;
+  background-color: #e0f2fe;
   border: none;
   font-size: 16px;
   padding: 4px 12px;
@@ -183,7 +183,7 @@ h1 {
 }
 
 .vote-buttons button:hover {
-  background-color: #7dd3fc;
+  background-color: #bae6fd;
 }
 
 .link-source:link {
