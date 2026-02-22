@@ -55,16 +55,19 @@ function Counter() {
 function App() {
   /* 1. defining state variable */
   const [showForm, setShowForm] = useState(false);
+  const [facts, setFacts] = useState(initialFacts);
 
   return (
     <>
       <Header showForm={showForm} setShowForm={setShowForm} />
 
       {/* 2. using state variable */}
-      {showForm ? <ThreadForm /> : null}
+      {showForm ? (
+        <ThreadForm setFacts={setFacts} setShowForm={setShowForm} />
+      ) : null}
       <main className="app-main">
         <CategoryFilter />
-        <ThreadList />
+        <ThreadList facts={facts} />
       </main>
     </>
   );
@@ -102,15 +105,56 @@ const CATEGORIES = [
   { name: "history", color: "#FFDAB3" },
 ];
 
-function ThreadForm() {
+// function to filter URL SOURCE
+
+function isValidHttpUrl(string) {
+  let url;
+  try {
+    url = new URL(string);
+  } catch (error) {
+    return false;
+  }
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
+//
+
+function ThreadForm({ setFacts, setShowForm }) {
   const [text, setText] = useState("");
-  const [source, setSource] = useState("");
+  const [source, setSource] = useState("http://example.com");
   const [category, setCategory] = useState("");
   const textLength = text.length;
 
   function handleSubmit(e) {
+    // 1. Preventing Browser Reload
     e.preventDefault();
     console.log(text, source, category);
+    // 2. Checking if data is valid. If so, create a new fact
+
+    if (text && isValidHttpUrl(source) && category && textLength <= 200) {
+      // 3. Create a new fact object
+
+      const newFact = {
+        id: Math.round(Math.random() * 1000000),
+        text,
+        source,
+        category,
+        votesInteresting: 0,
+        votesMindblowing: 0,
+        votesFalse: 0,
+        createdIn: new Date().getFullYear(),
+      };
+      // 4. Add the new fact to the UI: add the fact to state
+      setFacts((facts) => [newFact, ...facts]);
+
+      // 5. Reset the input fields (back to empty)
+      setText("");
+      setSource("");
+      setCategory("");
+
+      // 6. Close the form
+      setShowForm(false);
+    }
   }
 
   return (
@@ -163,10 +207,7 @@ function CategoryFilter() {
   );
 }
 
-function ThreadList() {
-  // TEMPORARY
-  const facts = initialFacts;
-
+function ThreadList({ facts }) {
   return (
     <section>
       <ul className="facts-list">
