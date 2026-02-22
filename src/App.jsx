@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import supabase from "./supabase";
+
 import "./style.css";
 import logo from "./assets/FactHiveLogo.png";
 
@@ -55,7 +57,17 @@ function Counter() {
 function App() {
   /* 1. defining state variable */
   const [showForm, setShowForm] = useState(false);
-  const [facts, setFacts] = useState(initialFacts);
+  const [facts, setFacts] = useState([]);
+
+  useEffect(function () {
+    async function getFacts() {
+      const { data: facthive, error } = await supabase
+        .from("facthive")
+        .select("*");
+      setFacts(facthive);
+    }
+    getFacts();
+  }, []);
 
   return (
     <>
