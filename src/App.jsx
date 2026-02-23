@@ -60,6 +60,9 @@ function App() {
   const [facts, setFacts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Category filtering //
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
   useEffect(function () {
     async function getFacts() {
       setIsLoading(true);
@@ -78,6 +81,13 @@ function App() {
     getFacts();
   }, []);
 
+  // Filtering on category buttons
+
+  const filteredFacts =
+    selectedCategory === "all"
+      ? facts
+      : facts.filter((fact) => fact.category === selectedCategory);
+
   return (
     <>
       <Header showForm={showForm} setShowForm={setShowForm} />
@@ -88,8 +98,11 @@ function App() {
       ) : null}
 
       <main className="app-main">
-        <CategoryFilter />
-        {isLoading ? <Loader /> : <ThreadList facts={facts} />}
+        <CategoryFilter
+          selectedCategory={setSelectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+        {isLoading ? <Loader /> : <ThreadList facts={filteredFacts} />}
       </main>
     </>
   );
@@ -211,18 +224,24 @@ function ThreadForm({ setFacts, setShowForm }) {
   );
 }
 
-function CategoryFilter() {
+function CategoryFilter({ selectedCategory, setSelectedCategory }) {
   return (
     <aside>
       <ul>
         <li className="category">
-          <button className="btn btn-all-categories">All</button>
+          <button
+            className="btn btn-all-categories"
+            onClick={() => setSelectedCategory("all")}
+          >
+            All
+          </button>
         </li>
         {CATEGORIES.map((cat) => (
           <li key={cat.name} className="category">
             <button
               className="btn btn-category"
               style={{ backgroundColor: cat.color }}
+              onClick={() => setSelectedCategory(cat.name)}
             >
               {cat.name}
             </button>
