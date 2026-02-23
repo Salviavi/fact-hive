@@ -58,13 +58,22 @@ function App() {
   /* 1. defining state variable */
   const [showForm, setShowForm] = useState(false);
   const [facts, setFacts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(function () {
     async function getFacts() {
+      setIsLoading(true);
       const { data: facthive, error } = await supabase
         .from("facthive")
-        .select("*");
-      setFacts(facthive);
+        .select("*")
+        .order("votesInteresting", { ascending: false })
+        .limit(100);
+
+      console.log(error);
+
+      if (!error) setFacts(facthive);
+      else alert("There was a problem in getting data");
+      setIsLoading(false);
     }
     getFacts();
   }, []);
@@ -77,12 +86,17 @@ function App() {
       {showForm ? (
         <ThreadForm setFacts={setFacts} setShowForm={setShowForm} />
       ) : null}
+
       <main className="app-main">
         <CategoryFilter />
-        <ThreadList facts={facts} />
+        {isLoading ? <Loader /> : <ThreadList facts={facts} />}
       </main>
     </>
   );
+}
+
+function Loader() {
+  return <p className="loader">Loading...</p>;
 }
 
 function Header({ showForm, setShowForm }) {
