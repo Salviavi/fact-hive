@@ -72,8 +72,6 @@ function App() {
         .order("votesInteresting", { ascending: false })
         .limit(100);
 
-      console.log(error);
-
       if (!error) setFacts(facthive);
       else alert("There was a problem in getting data");
       setIsLoading(false);
@@ -94,7 +92,7 @@ function App() {
 
       {/* 2. using state variable */}
       {showForm ? (
-        <ThreadForm setFacts={setFacts} setShowForm={setShowForm} />
+        <PostForm setFacts={setFacts} setShowForm={setShowForm} />
       ) : null}
 
       <main className="app-main">
@@ -102,7 +100,11 @@ function App() {
           selectedCategory={setSelectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-        {isLoading ? <Loader /> : <ThreadList facts={filteredFacts} />}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <PostList facts={filteredFacts} setFacts={setFacts} />
+        )}
       </main>
     </>
   );
@@ -159,7 +161,7 @@ function isValidHttpUrl(string) {
 
 //
 
-function ThreadForm({ setFacts, setShowForm }) {
+function PostForm({ setFacts, setShowForm }) {
   const [text, setText] = useState("");
   const [source, setSource] = useState("http://example.com");
   const [category, setCategory] = useState("");
@@ -198,7 +200,7 @@ function ThreadForm({ setFacts, setShowForm }) {
       setIsUploading(false);
 
       // 4. Add the new fact to the UI: add the fact to state
-      setFacts((facts) => [newFact[0], ...facts]);
+      if (!error) setFacts((facts) => [newFact[0], ...facts]);
 
       // 5. Reset the input fields (back to empty)
       setText("");
@@ -211,7 +213,7 @@ function ThreadForm({ setFacts, setShowForm }) {
   }
 
   return (
-    <form className="thread-form" onSubmit={handleSubmit}>
+    <form className="post-form" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Share a mind-blowing fact..."
@@ -274,7 +276,7 @@ function CategoryFilter({ selectedCategory, setSelectedCategory }) {
   );
 }
 
-function ThreadList({ facts }) {
+function PostList({ facts, setFacts }) {
   if (facts.length === 0)
     return (
       <p style={{ textAlign: "center", marginTop: "24px" }}>
@@ -291,9 +293,10 @@ function ThreadList({ facts }) {
           );
 
           return (
-            <Thread
+            <Post
               key={fact.id}
               fact={fact}
+              setFacts={setFacts}
               matchedCategory={matchedCategory}
             />
           );
@@ -304,9 +307,28 @@ function ThreadList({ facts }) {
   );
 }
 
-function Thread({ fact, matchedCategory }) {
+function Post({ fact, setFacts, matchedCategory }) {
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  async function handleVote(columnName) {
+    setIsUpdating(true);
+    const { data: updatedPost, error } = await supabase
+      .from("facthive")
+      .update({ [columnName]: fact[columnName] + 1 })
+      .eq("id", fact.id)
+      // selecting the data to put and store it to useState
+      .select();
+    setIsUpdating(false);
+
+    console.log(updatedPost);
+    if (!error)
+      setFacts((facts) =>
+        facts.map((f) => (f.id === fact.id ? updatedPost[0] : f)),
+      );
+  }
+
   return (
-    <li key={fact.id} className="thread">
+    <li key={fact.id} className="post">
       <p>
         {fact.text}
         <a className="link-source" href={fact.source} target="_blank">
@@ -322,9 +344,21 @@ function Thread({ fact, matchedCategory }) {
         {fact.category}
       </span>
       <div className="vote-buttons">
-        <button>👍 {fact.votesInteresting}</button>
-        <button>🤯 {fact.votesMindblowing}</button>
-        <button>⛔ {fact.votesFalse}</button>
+        <button
+          onClick={() => handleVote("votesInteresting")}
+          disabled={isUpdating}
+        >
+          👍 {fact.votesInteresting}
+        </button>
+        <button
+          onClick={() => handleVote("votesMindblowing")}
+          disabled={isUpdating}
+        >
+          🤯 {fact.votesMindblowing}
+        </button>
+        <button onClick={() => handleVote("votesFalse")} disabled={isUpdating}>
+          ⛔ {fact.votesFalse}
+        </button>
       </div>
     </li>
   );
