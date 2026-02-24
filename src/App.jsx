@@ -140,6 +140,7 @@ const CATEGORIES = [
   { name: "technology", color: "#b9fbc0" },
   { name: "science", color: "#cfbaf0" },
   { name: "psychology", color: "#ffcfd2" },
+  { name: "entertainment", color: "#FFFACD" },
   { name: "society", color: "#96BDC6" },
   { name: "history", color: "#FFDAB3" },
 ];
@@ -162,9 +163,10 @@ function ThreadForm({ setFacts, setShowForm }) {
   const [text, setText] = useState("");
   const [source, setSource] = useState("http://example.com");
   const [category, setCategory] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
   const textLength = text.length;
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     // 1. Preventing Browser Reload
     e.preventDefault();
     console.log(text, source, category);
@@ -173,6 +175,7 @@ function ThreadForm({ setFacts, setShowForm }) {
     if (text && isValidHttpUrl(source) && category && textLength <= 200) {
       // 3. Create a new fact object
 
+      /*
       const newFact = {
         id: Math.round(Math.random() * 1000000),
         text,
@@ -183,8 +186,19 @@ function ThreadForm({ setFacts, setShowForm }) {
         votesFalse: 0,
         createdIn: new Date().getFullYear(),
       };
+      */
+
+      // 3. Upload fact to Supabase and receive the new fact object
+      setIsUploading(true);
+      const { data: newFact, error } = await supabase
+        .from("facthive")
+        .insert([{ text, source, category }])
+        .select();
+
+      setIsUploading(false);
+
       // 4. Add the new fact to the UI: add the fact to state
-      setFacts((facts) => [newFact, ...facts]);
+      setFacts((facts) => [newFact[0], ...facts]);
 
       // 5. Reset the input fields (back to empty)
       setText("");
@@ -192,7 +206,7 @@ function ThreadForm({ setFacts, setShowForm }) {
       setCategory("");
 
       // 6. Close the form
-      setShowForm(false);
+      // setShowForm(false);
     }
   }
 
@@ -203,6 +217,7 @@ function ThreadForm({ setFacts, setShowForm }) {
         placeholder="Share a mind-blowing fact..."
         value={text}
         onChange={(e) => setText(e.target.value)}
+        disabled={isUploading}
       />
       <span>{200 - textLength}</span>
       <input
@@ -210,8 +225,13 @@ function ThreadForm({ setFacts, setShowForm }) {
         placeholder="Drop the fact source..."
         value={source}
         onChange={(e) => setSource(e.target.value)}
+        disabled={isUploading}
       />
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        disabled={isUploading}
+      >
         <option value="">Choose category:</option>
         {CATEGORIES.map((cat) => (
           <option key={cat.name} value={cat.name}>
@@ -219,7 +239,9 @@ function ThreadForm({ setFacts, setShowForm }) {
           </option>
         ))}
       </select>
-      <button className="btn btn-large">Post</button>
+      <button className="btn btn-large" disabled={isUploading}>
+        Post
+      </button>
     </form>
   );
 }
@@ -253,6 +275,13 @@ function CategoryFilter({ selectedCategory, setSelectedCategory }) {
 }
 
 function ThreadList({ facts }) {
+  if (facts.length === 0)
+    return (
+      <p style={{ textAlign: "center", marginTop: "24px" }}>
+        No fact for this category yet. Create the first one! 😉
+      </p>
+    );
+
   return (
     <section>
       <ul className="facts-list">
