@@ -4,56 +4,6 @@ import supabase from "./supabase";
 import "./style.css";
 import logo from "./assets/FactHiveLogo.png";
 
-const initialFacts = [
-  {
-    id: 1,
-    text: "Next.js is developed by the team at Vercel",
-    source: "https://nextjs.org/governance",
-    category: "technology",
-    votesInteresting: 24,
-    votesMindblowing: 9,
-    votesFalse: 4,
-    createdIn: 2024,
-  },
-  {
-    id: 2,
-    text: "While children who are exposed to childhood violence may have more problems as adults, they're not automatically doomed to become abusers themselves",
-    source:
-      "https://developingchild.harvard.edu/resources/briefs/8-things-remember-child-development/",
-    category: "society",
-    votesInteresting: 11,
-    votesMindblowing: 2,
-    votesFalse: 0,
-    createdIn: 2023,
-  },
-  {
-    id: 3,
-    text: "Vienna is the capital of Austria",
-    source: "https://www.britannica.com/place/Vienna",
-    category: "society",
-    votesInteresting: 8,
-    votesMindblowing: 3,
-    votesFalse: 1,
-    createdIn: 2015,
-  },
-];
-
-function Counter() {
-  const [count, setCount] = useState(5);
-
-  return (
-    <>
-      <span style={{ fontSize: "50px", marginRight: "20px" }}>{count}</span>
-      <button
-        className="btn btn-large"
-        onClick={() => setCount((count) => count + 1)}
-      >
-        +1
-      </button>
-    </>
-  );
-}
-
 function App() {
   /* 1. defining state variable */
   const [showForm, setShowForm] = useState(false);
@@ -163,7 +113,7 @@ function isValidHttpUrl(string) {
 
 function PostForm({ setFacts, setShowForm }) {
   const [text, setText] = useState("");
-  const [source, setSource] = useState("http://example.com");
+  const [source, setSource] = useState("");
   const [category, setCategory] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const textLength = text.length;
@@ -208,7 +158,7 @@ function PostForm({ setFacts, setShowForm }) {
       setCategory("");
 
       // 6. Close the form
-      // setShowForm(false);
+      setShowForm(false);
     }
   }
 
@@ -309,6 +259,8 @@ function PostList({ facts, setFacts }) {
 
 function Post({ fact, setFacts, matchedCategory }) {
   const [isUpdating, setIsUpdating] = useState(false);
+  const isDisputed =
+    fact.votesInteresting + fact.votesMindblowing < fact.votesFalse;
 
   async function handleVote(columnName) {
     setIsUpdating(true);
@@ -330,6 +282,7 @@ function Post({ fact, setFacts, matchedCategory }) {
   return (
     <li key={fact.id} className="post">
       <p>
+        {isDisputed ? <span className="disputed">[⛔DISPUTED]</span> : null}
         {fact.text}
         <a className="link-source" href={fact.source} target="_blank">
           (Source)
